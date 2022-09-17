@@ -22,28 +22,28 @@ app.use(cors());
 
 router.use('/meals', mealsRouter);
 
-app.get('/future-meals', async (req, res) => {
+router.get('/future-meals', async (req, res) => {
   const dbResult = await knex.raw(`SELECT * FROM meal WHERE meal.when > NOW()`);
   const row = dbResult[0];
 
   res.json(row);
 });
 
-app.get('/past-meals', async (req, res) => {
+router.get('/past-meals', async (req, res) => {
   const dbResult = await knex.raw(`SELECT * FROM meal WHERE meal.when < NOW()`);
   const row = dbResult[0];
 
   res.json(row);
 });
 
-app.get('/all-meals', async (req, res) => {
+router.get('/all-meals', async (req, res) => {
   const dbResult = await knex.raw(`SELECT * FROM meal`);
   const row = dbResult[0];
 
   res.json(row);
 });
 
-app.get('/first-meal', async (req, res) => {
+router.get('/first-meal', async (req, res) => {
   try {
     const dbResult = await knex.raw(`SELECT * FROM meal LIMIT 1`);
     const row = dbResult[0][0];
@@ -58,7 +58,7 @@ app.get('/first-meal', async (req, res) => {
   }
 });
 
-app.get('/last-meal', async (req, res) => {
+router.get('/last-meal', async (req, res) => {
   try {
     const dbResult = await knex.raw(
       `SELECT * FROM meal ORDER BY meal.id DESC LIMIT 1`
