@@ -37,7 +37,7 @@ router.get('/past-meals', async (req, res) => {
 });
 
 router.get('/all-meals', async (req, res) => {
-  const dbResult = await knex.raw(`SELECT * FROM meal`);
+  const dbResult = await knex.raw(`SELECT * FROM meal ORDER BY meal.id`);
   const row = dbResult[0];
 
   res.json(row);
@@ -68,10 +68,10 @@ router.get('/last-meal', async (req, res) => {
     if (row) {
       res.json(row);
     } else {
-      throw new Error('No meals found');
+      res.status(404).json({ error: 'Meal is not found' });
     }
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(500).json(error.message);
   }
 });
 
