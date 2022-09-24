@@ -5,6 +5,8 @@ const path = require('path');
 const knex = require('./database');
 
 const mealsRouter = require('./api/meals');
+const reservationsRouter = require('./api/reservations');
+
 const buildPath = path.join(__dirname, '../../dist');
 const port = process.env.PORT || 3000;
 const cors = require('cors');
@@ -21,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 router.use('/meals', mealsRouter);
+router.use('/reservations', reservationsRouter);
 
 router.get('/future-meals', async (req, res) => {
   const dbResult = await knex.raw(`SELECT * FROM meal WHERE meal.when > NOW()`);
@@ -46,7 +49,7 @@ router.get('/all-meals', async (req, res) => {
 router.get('/first-meal', async (req, res) => {
   try {
     const dbResult = await knex.raw(`SELECT * FROM meal LIMIT 1`);
-    const row = dbResult[0][0];
+    const row = dbResult[0];
 
     if (row) {
       res.json(row);
