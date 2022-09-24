@@ -142,4 +142,26 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/:meal_id/reviews', async (req, res) => {
+  const mealId = req.params.meal_id;
+  const query = knex
+    .select('review.*')
+    .from('review')
+    .join('meal', 'review.meal_id', '=', `meal.id`)
+    .having('meal_id', '=', mealId);
+
+  console.log('SQL', query.toSQL().sql);
+
+  try {
+    const reviews = await query;
+    if (reviews.length !== 0) {
+      res.json(reviews);
+    } else {
+      res.status(404).json({ error: 'No reviews found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
