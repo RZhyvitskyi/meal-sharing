@@ -49,7 +49,7 @@ router.get('/all-meals', async (req, res) => {
 router.get('/first-meal', async (req, res) => {
   try {
     const dbResult = await knex.raw(`SELECT * FROM meal LIMIT 1`);
-    const row = dbResult[0][0];
+    const row = dbResult[0];
 
     if (row) {
       res.json(row);
