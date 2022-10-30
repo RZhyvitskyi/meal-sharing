@@ -6,6 +6,7 @@ const knex = require('./database');
 
 const mealsRouter = require('./api/meals');
 const reservationsRouter = require('./api/reservations');
+const reviewsRouter = require('./api/reviews');
 
 const buildPath = path.join(__dirname, '../../dist');
 const port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(cors());
 
 router.use('/meals', mealsRouter);
 router.use('/reservations', reservationsRouter);
+router.use('/reviews', reviewsRouter);
 
 router.get('/future-meals', async (req, res) => {
   const dbResult = await knex.raw(`SELECT * FROM meal WHERE meal.when > NOW()`);
