@@ -1,0 +1,54 @@
+.meal__wrapper {
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.meal__wrapper:hover {
+  scale: 1.05;
+  transition: scale 0.2s ease-out 100ms;
+}
+
+.meal__image {
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.meal__image img {
+  display: block;
+  width: 100%;
+}
+
+.meal__guests {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.meal__info {
+  margin-bottom: 2rem;
+}
+
+.meal__info h3 {
+  margin-bottom: 1rem;
+}
+
+.meal__not-full,
+.meal__full {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.meal__not-full {
+  background-color: rgb(2, 114, 30);
+}
+
+.meal__full {
+  background-color: rgb(150, 0, 0);
+}
