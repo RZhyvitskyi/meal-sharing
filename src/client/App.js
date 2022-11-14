@@ -1,20 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TestComponent from './components/TestComponent/TestComponent';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/header/Header';
+import Meals from './components/meals/Meals';
+import Home from './components/layout/Home';
+import About from './components/layout/About';
+import MealShow from './components/meals/meal-show/MealShow';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Route exact path="/">
-        <p>Testing pipeline</p>
-      </Route>
-      <Route exact path="/lol">
-        <p>Testing pipeline</p>
-      </Route>
-      <Route exact path="/test-component">
-        <TestComponent></TestComponent>
-      </Route>
-    </Router>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/meals" element={<Meals />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/meals/:id" element={<MealShow />} />
+      </Routes>
+    </>
   );
 }
 
