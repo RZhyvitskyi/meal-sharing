@@ -36,10 +36,10 @@ router.get('/:id', async (req, res) => {
     const reservation = await knex
       .select()
       .from('reservation')
-      .where({ id: reservationId });
+      .where({ meal_id: reservationId });
 
     if (reservation.length !== 0) {
-      res.json(reservation[0]);
+      res.json(reservation);
     } else {
       res.status(404).json({ error: 'No reservation found' });
     }
